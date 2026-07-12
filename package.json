@@ -1,0 +1,79 @@
+{
+  "name": "@gbitx/pay-react-native",
+  "version": "0.1.0",
+  "description": "Accept crypto payments in your React Native app with GbitXPay. Opens the hosted GbitX checkout in a hardened WebView.",
+  "license": "MIT",
+  "author": "GBIT TECHNOLOGIES LIMITED COMPANY",
+  "homepage": "https://doc.gbitx.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gbitx1/gbitxpay-react-native"
+  },
+  "bugs": {
+    "url": "https://github.com/gbitx1/gbitxpay-react-native/issues"
+  },
+  "keywords": [
+    "gbitx",
+    "gbitxpay",
+    "crypto",
+    "payments",
+    "checkout",
+    "react-native",
+    "webview",
+    "bitcoin",
+    "usdt"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "react-native": "./src/index.ts",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "react-native": "./src/index.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "SECURITY.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test \"__tests__/**/*.test.ts\"",
+    "prepublishOnly": "npm run typecheck && npm run test && npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-native": ">=0.71.0",
+    "react-native-webview": ">=13.0.0 <15.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": false },
+    "react-native": { "optional": false },
+    "react-native-webview": { "optional": false }
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "react": "18.2.0",
+    "react-native": "0.74.5",
+    "react-native-webview": "13.16.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.16.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
