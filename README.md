@@ -36,8 +36,6 @@ The SDK validates your publishable key against the API host `gateway.gbitx.com` 
 
 ## Install
 
-> **Pre‑publish:** `@gbitx/pay-react-native` is not on npm yet, so the command below 404s today. Until it publishes, resolve it locally — `npm pack` in the SDK repo and install the tarball (`npm install ../path/gbitx-pay-react-native-0.1.0.tgz`), or a `file:` path. `react-native-webview` is always a real peer dependency you install.
-
 ```sh
 npm install @gbitx/pay-react-native react-native-webview
 # or: yarn add @gbitx/pay-react-native react-native-webview
