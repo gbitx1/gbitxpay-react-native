@@ -18,10 +18,10 @@ This SDK opens the GbitXPay hosted checkout inside a hardened `react-native-webv
 
 ## Residual risks (cannot be closed client‑side)
 
-1. **A compromised checkout origin can emit a forged `confirmed`.** If `pay.gbitx.com` itself is compromised or MITM'd, a same‑origin page can send any bridge event. No client can distinguish this. **Mitigation: webhook‑is‑truth** — never fulfil from the SDK result. TLS + the origin lock prevent MITM; this is why fulfilment lives on your server.
+1. **A compromised checkout origin can emit a forged `confirmed`.** If `www.gbitxpay.com` itself is compromised or MITM'd, a same‑origin page can send any bridge event. No client can distinguish this. **Mitigation: webhook‑is‑truth** — never fulfil from the SDK result. TLS + the origin lock prevent MITM; this is why fulfilment lives on your server.
 2. **Android sub‑frame navigations aren't gated by `onShouldStartLoadWithRequest`** (a platform limitation). The checkout page ships no iframes and `mixedContentMode: 'never'` blocks `http` frames; any off‑origin frame that did load could not forge a trusted message (the authenticated‑origin gate rejects it) nor navigate the top frame. Defense in depth belongs in the page's CSP (`frame-src`).
 3. **iOS App‑Bound Domains** (`WKAppBoundDomains` / `limitsNavigationsToAppBoundDomains`) is an optional native origin lock we do **not** force, because it requires merchant `Info.plist` entries and constrains other WebViews in the app. Consider adding it if your app uses only a small set of WebView domains.
-4. **TLS public‑key pinning** for `pay.gbitx.com` is a recommended fast‑follow, not enabled by default.
+4. **TLS public‑key pinning** for `www.gbitxpay.com` is a recommended fast‑follow, not enabled by default.
 
 ## Reporting a vulnerability
 

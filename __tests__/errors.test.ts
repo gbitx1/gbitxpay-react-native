@@ -19,7 +19,7 @@ test('isGbitXPayError narrows correctly', () => {
 
 test('toJSON never leaks cause or a token', () => {
   const e = new GbitXPayError('network_error', 'nope', {
-    cause: new Error('boom at https://pay.gbitx.com/p/x#t=SUPERSECRETTOKEN'),
+    cause: new Error('boom at https://www.gbitxpay.com/p/x#t=SUPERSECRETTOKEN'),
   });
   const json = JSON.stringify(e);
   assert.ok(!json.includes('SUPERSECRETTOKEN'));

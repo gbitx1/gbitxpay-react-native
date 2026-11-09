@@ -6,7 +6,7 @@ import type { ConfigureOptions, Environment, MerchantInfo } from './types';
 // Bootstrap API base — where /v1/sdk/config lives (distinct from the checkout
 // host returned by that endpoint). Overridable via configure({ apiBaseUrl })
 // for staging, but must be https.
-const DEFAULT_API_BASE = 'https://gateway.gbitx.com';
+const DEFAULT_API_BASE = 'https://api.gbitxpay.com';
 const DEFAULT_TIMEOUT_MS = 10_000;
 const MIN_TIMEOUT_MS = 1_000;
 const MAX_TIMEOUT_MS = 60_000;
@@ -14,7 +14,7 @@ const MAX_TIMEOUT_MS = 60_000;
 export interface ResolvedConfig {
   publishableKey: string;
   environment: Environment;
-  // Frozen https origin of the checkout host (e.g. https://pay.gbitx.com).
+  // Frozen https origin of the checkout host (e.g. https://www.gbitxpay.com).
   // The single root of trust for the WebView source, originWhitelist, and
   // every message-origin check. Server-authoritative, asserted https.
   checkoutOrigin: string;

@@ -56,13 +56,13 @@ test('assertPaymentArgs rejects url-breaking / malformed values', () => {
 });
 
 test('assertHttpsOrigin enforces https and returns canonical origin', () => {
-  assert.equal(assertHttpsOrigin('https://pay.gbitx.com/p/x?y#z', 'checkoutBaseUrl'), 'https://pay.gbitx.com');
-  assert.equal(grab(() => assertHttpsOrigin('http://pay.gbitx.com', 'x')).code, 'invalid_arguments');
+  assert.equal(assertHttpsOrigin('https://www.gbitxpay.com/p/x?y#z', 'checkoutBaseUrl'), 'https://www.gbitxpay.com');
+  assert.equal(grab(() => assertHttpsOrigin('http://www.gbitxpay.com', 'x')).code, 'invalid_arguments');
   assert.equal(grab(() => assertHttpsOrigin('not a url', 'x')).code, 'invalid_arguments');
 });
 
 test('buildCheckoutUrl embeds embed=native and the token fragment', () => {
-  const url = buildCheckoutUrl('https://pay.gbitx.com', 'pay123456', 'a'.repeat(32));
-  assert.ok(url.startsWith('https://pay.gbitx.com/p/pay123456?embed=native#t='));
+  const url = buildCheckoutUrl('https://www.gbitxpay.com', 'pay123456', 'a'.repeat(32));
+  assert.ok(url.startsWith('https://www.gbitxpay.com/p/pay123456?embed=native#t='));
   assert.ok(url.endsWith('#t=' + 'a'.repeat(32)));
 });

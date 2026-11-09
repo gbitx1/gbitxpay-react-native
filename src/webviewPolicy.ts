@@ -4,8 +4,8 @@
 //
 // EXACT origin equality everywhere (never startsWith / includes). The library's
 // own `originWhitelist` prop is a *prefix* match (unanchored regex), so
-// `https://pay.gbitx.com` there would also match `https://pay.gbitx.com.evil.com`
-// and `https://pay.gbitx.company`. We therefore set originWhitelist to ['*'] in
+// `https://www.gbitxpay.com` there would also match `https://www.gbitxpay.com.evil.com`
+// and `https://www.gbitxpay.company`. We therefore set originWhitelist to ['*'] in
 // the component and make THIS module the single authoritative gate.
 
 function parse(url: unknown): URL | null {

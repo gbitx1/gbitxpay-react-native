@@ -5,7 +5,7 @@ import { present, registerHost, __resetControllerForTest, type CheckoutSession }
 import { grabAsync, fakeResponse } from './_helpers';
 
 const PK = 'pk_test_' + 'a'.repeat(64);
-const okBody = { success: true, environment: 'test', checkoutBaseUrl: 'https://pay.gbitx.com', merchant: { name: 'Acme', website: null } };
+const okBody = { success: true, environment: 'test', checkoutBaseUrl: 'https://www.gbitxpay.com', merchant: { name: 'Acme', website: null } };
 
 function stubFetch(fn: () => Promise<Response>) {
   (globalThis as unknown as { fetch: unknown }).fetch = fn;
@@ -47,7 +47,7 @@ test('present() opens one session, blocks a second, and settle() resolves', asyn
   const p = present({ paymentId: 'pay12345', clientToken: 'a'.repeat(32) });
   assert.ok(active, 'host received a session synchronously');
   const session = active as unknown as CheckoutSession;
-  assert.ok(session.url.startsWith('https://pay.gbitx.com/p/pay12345?embed=native#t='));
+  assert.ok(session.url.startsWith('https://www.gbitxpay.com/p/pay12345?embed=native#t='));
 
   const e = await grabAsync(() => present({ paymentId: 'pay67890', clientToken: 'b'.repeat(32) }));
   assert.equal(e.code, 'invalid_arguments'); // "a checkout is already open"

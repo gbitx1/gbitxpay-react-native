@@ -8,7 +8,7 @@ import express from 'express';
 import crypto from 'node:crypto';
 
 const app = express();
-const GATEWAY = process.env.GBITX_API_BASE || 'https://gateway.gbitx.com';
+const GATEWAY = process.env.GBITX_API_BASE || 'https://api.gbitxpay.com';
 const SECRET_KEY = process.env.GBITX_SECRET_KEY;       // gk_live_… / gk_test_…
 const WEBHOOK_SECRET = process.env.GBITX_WEBHOOK_SECRET; // whsec_…
 

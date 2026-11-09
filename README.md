@@ -22,7 +22,7 @@ POST /v1/payments  ──────────────▶  { id, clientTo
                                               │
                                    GbitXPay.present({ paymentId, clientToken })
                                               │
-                                   opens pay.gbitx.com checkout in a WebView
+                                   opens www.gbitxpay.com checkout in a WebView
                                               │
    signed webhook  ◀──── PAYMENT_CONFIRMED ───┤ (source of truth)
    fulfil the order here                      └── result: { status: 'confirmed', … }  (UX only)
@@ -30,7 +30,7 @@ POST /v1/payments  ──────────────▶  { id, clientTo
 
 Your **server** creates the payment with your **secret** key and gives the app only `{ paymentId, clientToken }`. The app never calls `POST /v1/payments`, and the secret key must **never** be in your app binary.
 
-The SDK validates your publishable key against the API host `gateway.gbitx.com` (the `apiBaseUrl` default), which returns the separate, pinned checkout origin `pay.gbitx.com` that the WebView locks to. They are intentionally different hosts. (`doc.gbitx.com` is the docs site.)
+The SDK validates your publishable key against the API host `api.gbitxpay.com` (the `apiBaseUrl` default), which returns the separate, pinned checkout origin `www.gbitxpay.com` that the WebView locks to. They are intentionally different hosts. (`doc.gbitxpay.com` is the docs site.)
 
 ---
 
@@ -100,7 +100,7 @@ The app must receive `{ paymentId, clientToken }` from your backend. Your backen
 ```js
 // Node/Express — on YOUR server. Never in the app.
 app.post('/checkout', async (req, res) => {
-  const r = await fetch('https://gateway.gbitx.com/v1/payments', {
+  const r = await fetch('https://api.gbitxpay.com/v1/payments', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.GBITX_SECRET_KEY}`, // gk_live_…
@@ -140,7 +140,7 @@ The SDK additionally:
 - **Fulfil on your server, from the signed webhook** (`PAYMENT_CONFIRMED`) or a server‑side `GET /v1/payments/:id` with your secret key. SDK callbacks are UX only and forgeable on a compromised device.
 - **The app holds a publishable key only.** Passing a `gk_` secret key throws `secret_key_used` — remove it from your app immediately.
 - **The client token is single‑payment and short‑lived** (dies with the 60‑minute payment). The SDK never persists it and it must never be logged. A new attempt requires your server to mint a new payment.
-- **Networking is HTTPS‑only to pay.gbitx.com.** Do **not** add an iOS ATS exception (`NSAllowsArbitraryLoads`) or Android cleartext (`usesCleartextTraffic="true"`) on the SDK's behalf — none is needed and it weakens your whole app.
+- **Networking is HTTPS‑only to www.gbitxpay.com.** Do **not** add an iOS ATS exception (`NSAllowsArbitraryLoads`) or Android cleartext (`usesCleartextTraffic="true"`) on the SDK's behalf — none is needed and it weakens your whole app.
 
 ---
 
@@ -159,7 +159,7 @@ Crypto is permitted for **physical goods** and **real‑world services** (Apple 
 | `publishableKey` | `string` | — | `pk_live_…` / `pk_test_…`. Validated against the server. |
 | `environment` | `'live' \| 'test'` | inferred | If set, must match the key and the server. |
 | `timeoutMs` | `number` | `10000` | Bounded timeout for the validation call. |
-| `apiBaseUrl` | `string` | `https://gateway.gbitx.com` | Override for staging. Must be https. |
+| `apiBaseUrl` | `string` | `https://api.gbitxpay.com` | Override for staging. Must be https. |
 | `debug` | `boolean` | `false` | Redacted debug logging (never prints key/token). |
 
 Must complete before `present()`. Rejects with a typed `GbitXPayError` (see below).

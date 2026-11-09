@@ -61,7 +61,7 @@ export interface ConfigureOptions {
   // Bounded timeout (ms) for the GET /v1/sdk/config validation call.
   // Default 10_000.
   timeoutMs?: number;
-  // Override the GbitX API base (default https://gateway.gbitx.com). Must be
+  // Override the GbitX API base (default https://api.gbitxpay.com). Must be
   // https. For staging/testing only — never point this at an untrusted host.
   apiBaseUrl?: string;
   // Enable redacted debug logging (never prints a key/token/full URL).

@@ -37,15 +37,15 @@ test('mapConfigError never echoes a key-shaped server message', () => {
 });
 
 test('parseConfigSuccess accepts a valid body', () => {
-  const r = parseConfigSuccess({ success: true, environment: 'live', checkoutBaseUrl: 'https://pay.gbitx.com', merchant: { name: 'Acme', website: 'https://acme.test' } });
+  const r = parseConfigSuccess({ success: true, environment: 'live', checkoutBaseUrl: 'https://www.gbitxpay.com', merchant: { name: 'Acme', website: 'https://acme.test' } });
   assert.equal(r.environment, 'live');
-  assert.equal(r.checkoutOrigin, 'https://pay.gbitx.com');
+  assert.equal(r.checkoutOrigin, 'https://www.gbitxpay.com');
   assert.equal(r.merchant.name, 'Acme');
   assert.equal(r.merchant.website, 'https://acme.test');
 });
 
 test('parseConfigSuccess defaults a missing merchant name and null website', () => {
-  const r = parseConfigSuccess({ success: true, environment: 'test', checkoutBaseUrl: 'https://pay.gbitx.com', merchant: {} });
+  const r = parseConfigSuccess({ success: true, environment: 'test', checkoutBaseUrl: 'https://www.gbitxpay.com', merchant: {} });
   assert.equal(r.merchant.name, 'Merchant');
   assert.equal(r.merchant.website, null);
 });
@@ -55,11 +55,11 @@ test('parseConfigSuccess treats junk 200 bodies as server_error', () => {
     null,
     {},
     { success: false },
-    { success: true, environment: 'prod', checkoutBaseUrl: 'https://pay.gbitx.com', merchant: {} },
-    { success: true, environment: 'live', checkoutBaseUrl: 'http://pay.gbitx.com', merchant: {} },
+    { success: true, environment: 'prod', checkoutBaseUrl: 'https://www.gbitxpay.com', merchant: {} },
+    { success: true, environment: 'live', checkoutBaseUrl: 'http://www.gbitxpay.com', merchant: {} },
     { success: true, environment: 'live', checkoutBaseUrl: 'not-a-url', merchant: {} },
-    { success: true, environment: 'live', checkoutBaseUrl: 'https://pay.gbitx.com', merchant: null },
-    { success: true, environment: 'live', checkoutBaseUrl: 'https://pay.gbitx.com', merchant: [] },
+    { success: true, environment: 'live', checkoutBaseUrl: 'https://www.gbitxpay.com', merchant: null },
+    { success: true, environment: 'live', checkoutBaseUrl: 'https://www.gbitxpay.com', merchant: [] },
   ];
   for (const b of bads) {
     assert.equal(grab(() => parseConfigSuccess(b)).code, 'server_error', JSON.stringify(b));

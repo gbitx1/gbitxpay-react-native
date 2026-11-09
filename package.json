@@ -1,10 +1,10 @@
 {
   "name": "@gbitx/pay-react-native",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Accept crypto payments in your React Native app with GbitXPay. Opens the hosted GbitX checkout in a hardened WebView.",
   "license": "MIT",
   "author": "GBIT TECHNOLOGIES LIMITED COMPANY",
-  "homepage": "https://doc.gbitx.com",
+  "homepage": "https://doc.gbitxpay.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/gbitx1/gbitxpay-react-native"
